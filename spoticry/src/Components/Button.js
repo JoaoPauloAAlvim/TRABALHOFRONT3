@@ -1,7 +1,9 @@
 import react from "react";
+import { ButtonStyled } from "../style";
 
-export function Button (props){
-    return<>
-        <button>{props.text}</button>
-    </>
+ export const Button =(props)=>{
+    return<ButtonStyled>
+        {props.text}
+    </ButtonStyled>
 }
+

@@ -1,10 +1,13 @@
 import react from "react";
+import {FooterLinksStyled,FooterLink} from "../style"
 
-export function FooterLinks(){
-    return <>
-        <a href="https://google.com">Sobre Nós</a>
-        <a href="https://google.com">Ajuda</a>
-        <a href="https://google.com">Política de Privacidade</a>
-        <a href="https://google.com">Termos de Serviço</a>
-    </>
+
+export const FooterLinks=()=>{
+    return <FooterLinksStyled>
+        <FooterLink href="https://google.com">Sobre Nós</FooterLink>
+        <FooterLink href="https://google.com">Ajuda</FooterLink>
+        <FooterLink href="https://google.com">Política de Privacidade</FooterLink>
+        <FooterLink href="https://google.com">Termos de Serviço</FooterLink>
+    </FooterLinksStyled>
 }
+

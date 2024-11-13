@@ -1,9 +1,17 @@
 import react from "react";
+import { ImageSection } from "../style";
+import { SectionStyled } from "../style";
+import { TextContainer } from "../style";
 
-export function Section(props){
-    return <>
-        <img src={props.img} alt={props.descricao}/>
-        <h1>{props.title}</h1>
+
+export const Section = (props) => {
+  return (
+    <SectionStyled>
+      <TextContainer>
+        <h2>{props.title}</h2>
         <p>{props.subtitle}</p>
-    </>
-}
+      </TextContainer>
+      <ImageSection src={props.image} alt={props.descricao} />
+    </SectionStyled>
+  );
+};

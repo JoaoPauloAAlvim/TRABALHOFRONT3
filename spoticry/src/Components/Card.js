@@ -1,8 +1,10 @@
 import react from "react";
+import { CardImage, CardText, CardContainer} from "../style";
 
-export function Card (props){
-    return<>
-        <img src={props.img} alt={'props.descricao'}></img>
-        <p>{props.text}</p>
-    </>
+export const Card =(props)=>{
+    return<CardContainer>
+        <CardImage src={props.img} alt={props.descricao}/>
+        <CardText>{props.text}</CardText>
+    </CardContainer>
 }
+

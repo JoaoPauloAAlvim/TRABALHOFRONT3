@@ -1,9 +1,11 @@
 import react from "react";
 import { Button } from "./Button";
+import { HeaderStyled } from "../style";
 
-export function Header(props){
-    return<>
+export const Header=(props)=>{
+    return<HeaderStyled>
         <img src ={props.logo} alt={"Spoticry"}/>
-        <Button text ={'Login'}></Button>
-    </>
+        <Button text ={'Login'}/>
+    </HeaderStyled>
 }
+
