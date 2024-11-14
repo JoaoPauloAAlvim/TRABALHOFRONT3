@@ -5,7 +5,7 @@ import { HeaderStyled } from "../style";
 export const Header=(props)=>{
     return<HeaderStyled>
         <img src ={props.logo} alt={"Spoticry"}/>
-        <Button text ={'Login'}/>
+        <Button text ={'Entrar'}/>
     </HeaderStyled>
 }
 
