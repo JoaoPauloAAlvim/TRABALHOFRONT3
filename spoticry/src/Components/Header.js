@@ -1,11 +1,14 @@
 import react from "react";
 import { Button } from "./Button";
-import { HeaderStyled } from "../style";
+import { HeaderLogo, HeaderStyled } from "../style";
+import spoticryIcon from "../Assets/Icons/spoticryIcon.png"
+import { useCoordinator } from "../hooks/useCoordinator";
 
-export const Header=(props)=>{
+export const Header=()=>{
+    const {goToLogin}= useCoordinator()
     return<HeaderStyled>
-        <img src ={props.logo} alt={"Spoticry"}/>
-        <Button text ={'Entrar'}/>
+        <HeaderLogo src ={spoticryIcon} alt={"Spoticry"}/>
+        <Button text ={'Entrar'} onClick={goToLogin}/>
     </HeaderStyled>
 }
 

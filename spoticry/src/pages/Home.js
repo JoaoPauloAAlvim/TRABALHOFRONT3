@@ -6,12 +6,12 @@ import {Nav} from "../Components/Nav"
 
 export const Home=()=>{
     return<>
-    <Header logo={''}/>
+    <Header/>
     <Section title={'Descubra Novos Sons e Crie Playlists Perfeitas:\n Tudo em Um Só Lugar!'}
     subtitle={'Acesse suas músicas favoritas, descubra novos artistas \ne crie playlists que combinam com seu estilo!'}
     img={''} descricao={''}/>
     <Nav ></Nav>
-    <Footer></Footer>
+    <Footer/>
     </>
 }
 
