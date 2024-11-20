@@ -306,3 +306,21 @@ export const CenteredContainer = styled.div`
   height: 100vh;
   background-color: ${colors.white}; 
 `;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+`;
+
+export const LoadingGif = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+`;
