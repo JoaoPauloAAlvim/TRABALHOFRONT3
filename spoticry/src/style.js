@@ -324,3 +324,10 @@ export const LoadingGif = styled.img`
   height: 100px;
   z-index: 10;
 `;
+
+export const PlaylistItem = styled.li`
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+`;
