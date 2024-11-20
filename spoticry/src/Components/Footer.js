@@ -1,12 +1,13 @@
 import { FooterLinks } from "./FooterLinks";
 import { SocialLinks } from "./SocialLinks";
 import { FooterStyled, FooterTop, FooterBottom, FooterLogo } from "../style";
+import spoticryIcon from "../Assets/Icons/spoticryIcon.png"
 
 export const Footer = (props) => {
   return (
     <FooterStyled>
       <FooterTop>
-        <FooterLogo src={props.logo} alt={"Spoticry"} />
+        <FooterLogo src={spoticryIcon} alt={"Spoticry"} />
         <FooterLinks />
         <SocialLinks />
       </FooterTop>

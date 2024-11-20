@@ -43,6 +43,16 @@ export const HeaderStyled = styled.div`
     }
 `;
 
+export const HeaderLogo = styled.img`
+    width: 100px;
+    height: auto;
+    margin-right: 20px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 10px;
+    }
+`;
+
 export const SectionStyled = styled.div`
     display: flex;
     justify-content: space-between;
@@ -79,7 +89,7 @@ export const ImageSection = styled.img`
 `;
 
 export const NavStyled = styled.div`
-    background-color: ${colors.charcoal};
+    background-color: ${colors.slateGray};
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
@@ -139,8 +149,8 @@ export const FooterStyled = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: ${colors.white};
-    color: ${colors.charcoal};
+    background-color: ${colors.charcoal};
+    color: ${colors.white};
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
@@ -165,7 +175,7 @@ export const FooterBottom = styled.div`
     padding-top: 15px;
     width: 100%;
     font-size: 14px;
-    color: ${colors.charcoal};
+    color: ${colors.white};
     text-align: center;
 `;
 
@@ -191,7 +201,7 @@ export const FooterLinksStyled = styled.div`
 `;
 
 export const FooterLink = styled.a`
-    color: ${colors.charcoal};
+    color: ${colors.white};
     text-decoration: none;
     margin: 0 10px;
     
