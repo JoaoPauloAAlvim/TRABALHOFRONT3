@@ -11,9 +11,9 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/playlists" element={<Playlist />} />
-        {/* <Route path="/playlists/:id/tracks" element={<Track />} />
-        <Route path="/song/:id" element={<Song />} />  */}
+        <Route path="/playlist" element={<Playlist />} />
+        {/* <Route path="/playlists/tracks" element={<Track />} />
+        <Route path="/song" element={<Song />} />  */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

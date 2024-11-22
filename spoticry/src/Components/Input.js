@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "../hooks/useForm";
 import { login } from "../services/auth";
-import { useNavigate } from "react-router-dom";
 import { Form, InputField, Label, LoginContainer, Title, ErrorMessage,LoadingGif} from "../style";
 import { Button } from "./Button";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif"
-import goToHome, { useCoordinator } from "../hooks/useCoordinator"
+import  { useCoordinator } from "../hooks/useCoordinator"
 
 export const Input = () => {
   const { form, onChange, cleanFields } = useForm({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const {goToHome,goToPlaylists}= useCoordinator()
+  const {goToPlaylists}= useCoordinator()
 
   const handleLogin = (event) => {
     event.preventDefault();
