@@ -2,48 +2,50 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getUserIdFromToken } from "../services/getUserIdFromToken";
 import URL_BASE from "../Constants/URL_BASE";
+import { usePlaylistContext } from "../contexts/PlaylistContext"; 
 
-export const usePlaylistsById = () => {
-  const [playlists, setPlaylists] = useState([]);
+export const usePlaylistsById = (reloadFlag) => {
+  const { playlists, updatePlaylists } = usePlaylistContext(); 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
+
   const token = localStorage.getItem("spoticry_token");
   const userId = getUserIdFromToken(token);
-  
-  const getPlaylistById = () => {
+
+  const fetchPlaylists = async () => {
     if (!userId || !token) {
-      setError("Parâmetros inválidos ou usuário não autenticado.");
+      setError("Usuário não autenticado.");
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    setError("");
+    setError(null);
 
-    axios
-      .get(`${URL_BASE}/playlist/user/${userId}/playlists`, {
+    try {
+      const response = await axios.get(`${URL_BASE}/playlist/user/${userId}/playlists`, {
         headers: {
           Authorization: token,
         },
-      })
-      .then((response) => {
-        setPlaylists(Array.isArray(response.data) ? response.data : []);
-      })
-      .catch((err) => {
-        setError("Erro ao carregar playlists.");
-        console.error("Erro ao buscar playlists:", err);
-      })
-      .finally(() => {
-        setLoading(false);
       });
+      updatePlaylists(response.data.playlists || []);
+    } catch (err) {
+      console.error("Erro ao buscar playlists:", err);
+      setError("Erro ao carregar playlists.");
+    } finally {
+      setLoading(false);
+    }
   };
-  useEffect(() => {
-    getPlaylistById();
-  }, []);
 
   useEffect(() => {
-    getPlaylistById();
-  }, [userId]);
+    fetchPlaylists();
+  }, []); 
+
+  useEffect(() => {
+    if (reloadFlag) {
+      fetchPlaylists();
+    }
+  }, [reloadFlag]);
 
   return { playlists, loading, error };
 };

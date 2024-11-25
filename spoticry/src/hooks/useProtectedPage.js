@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useCoordinator } from "./useCoordinator";
+import {goToLogin} from "./useCoordinator"
 
 export const useProtectedPage = () => {
   const {goToLogin} = useCoordinator() 
