@@ -24,16 +24,16 @@ export const useCreatePlaylist = () => {
 
     const tempId = `temp-${Date.now()}`;
     const tempPlaylist = { id: tempId, name, description, songs, userId };
-    updatePlaylists([...playlists, tempPlaylist]); 
+
+    updatePlaylists([...playlists, tempPlaylist]);
 
     try {
-      const requestBody = { 
+      const requestBody = {
         userId: userId,
-        name: name,      
+        name: name,
         description: description || "Sem descrição",
-        songs: songs   
+        songs: songs
       };
-      
 
       const response = await axios.post(`${URL_BASE}/playlist`, requestBody, {
         headers: {
@@ -45,7 +45,7 @@ export const useCreatePlaylist = () => {
 
       updatePlaylists((prevPlaylists) =>
         prevPlaylists.map((playlist) =>
-          playlist.id === tempId ? { ...newPlaylist, id: tempId } : playlist
+          playlist.id === tempId ? { ...newPlaylist, id: newPlaylist.id } : playlist
         )
       );
 
