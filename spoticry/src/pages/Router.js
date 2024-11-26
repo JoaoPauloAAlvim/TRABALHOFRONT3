@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../Pages/Home";
 import ErrorPage from "../Pages/ErrorPage";
 import Login from "./Login";
-import Playlist from"./Playlist";
+import Playlists from"./Playlists";
+import Playlist from "./Playlist";
 
 const Router = () => {
   return (
@@ -11,9 +12,9 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/playlist" element={<Playlist />} />
-        {/* <Route path="/playlists/tracks" element={<Track />} />
-        <Route path="/song" element={<Song />} />  */}
+        <Route path="/playlists" element={<Playlists />} />
+        <Route path="/playlists/playlist/:id" element={<Playlist />} />
+        {/* <Route path="/song" element={<Song />} />  */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

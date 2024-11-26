@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { useProtectedPage } from "../hooks/useProtectedPage";
-import PlaylistsList from "../Components/PlaylistList";
+import React from "react";
+import AddSongToPlaylist from "../Components/AddSongToPlaylist";
+import { useParams } from "react-router-dom";
 
-const Playlist = () => {
-  useProtectedPage();
-
+const PlaylistPage = () => {
+const {id} = useParams()
   return (
     <div>
-      <PlaylistsList />
+      <h1>Gerenciar Playlist</h1>
+
+      <AddSongToPlaylist selectedPlaylistId={id} />
     </div>
   );
 };
 
-export default Playlist;
+export default PlaylistPage;

@@ -6,14 +6,20 @@ import { usePlaylistsById } from "../hooks/usePlaylistsById";
 import { useDeletePlaylist } from "../hooks/useDeletePlaylist";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import EditPlaylistModal from "./EditPlaylistModal";
+import { useCoordinator } from "../hooks/useCoordinator";
 
 const PlaylistsList = () => {
   const { playlists, updatePlaylists } = usePlaylistContext();
   const { loading, error } = usePlaylistsById();
-  const { deletePlaylist, loading: deleting, error: deleteError } = useDeletePlaylist();
+  const {
+    deletePlaylist,
+    loading: deleting,
+    error: deleteError,
+  } = useDeletePlaylist();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const { goToPlaylist } = useCoordinator();
 
   const toggleCreateModal = () => setIsCreateModalOpen((prev) => !prev);
 
@@ -24,7 +30,9 @@ const PlaylistsList = () => {
       const result = await deletePlaylist(playlistId);
       if (result.success) {
         alert("Playlist excluída com sucesso!");
-        updatePlaylists(playlists.filter((playlist) => playlist._id !== playlistId));
+        updatePlaylists(
+          playlists.filter((playlist) => playlist._id !== playlistId)
+        );
       } else {
         alert("Erro ao excluir a playlist: " + deleteError);
       }
@@ -33,7 +41,11 @@ const PlaylistsList = () => {
 
   const handleEdit = (playlist) => {
     setSelectedPlaylist(playlist);
-    toggleEditModal(); 
+    toggleEditModal();
+  };
+
+  const handleGoToPlaylist = (playlistId) => {
+    goToPlaylist(playlistId); 
   };
 
   if (loading) {
@@ -55,8 +67,18 @@ const PlaylistsList = () => {
               <h3>{playlist._name}</h3>
               <p>{playlist._description || "Sem descrição"}</p>
               <button onClick={() => handleEdit(playlist)}>Editar</button>
-              <button onClick={() => handleDelete(playlist._id)} disabled={deleting}>
-                {deleting ? <LoadingGif src={loadingGif} alt="Deletando playlist..." />: "Excluir"}
+              <button
+                onClick={() => handleDelete(playlist._id)}
+                disabled={deleting}
+              >
+                {deleting ? (
+                  <LoadingGif src={loadingGif} alt="Deletando playlist..." />
+                ) : (
+                  "Excluir"
+                )}
+              </button>
+              <button onClick={() => handleGoToPlaylist(playlist._id)}>
+                Ir para Músicas
               </button>
             </PlaylistItem>
           ))}
@@ -66,7 +88,10 @@ const PlaylistsList = () => {
       )}
 
       <button onClick={toggleCreateModal}>Criar Nova Playlist</button>
-      <CreatePlaylistModal isOpen={isCreateModalOpen} onClose={toggleCreateModal} />
+      <CreatePlaylistModal
+        isOpen={isCreateModalOpen}
+        onClose={toggleCreateModal}
+      />
 
       <EditPlaylistModal
         isOpen={isEditModalOpen}
