@@ -1,33 +1,39 @@
 import React, { useState } from "react";
-import CreatePlaylistModal from "./CreatePlaylistModal";
 import { usePlaylistContext } from "../contexts/PlaylistContext";
 import { LoadingGif, PlaylistItem } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import { usePlaylistsById } from "../hooks/usePlaylistsById";
 import { useDeletePlaylist } from "../hooks/useDeletePlaylist";
+import CreatePlaylistModal from "./CreatePlaylistModal";
+import EditPlaylistModal from "./EditPlaylistModal";
 
 const PlaylistsList = () => {
   const { playlists, updatePlaylists } = usePlaylistContext();
   const { loading, error } = usePlaylistsById();
-  const {
-    deletePlaylist,
-    loading: deleting,
-    error: deleteError,
-  } = useDeletePlaylist();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { deletePlaylist, loading: deleting, error: deleteError } = useDeletePlaylist();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
-  const toggleModal = () => setIsModalOpen((prev) => !prev);
+  const toggleCreateModal = () => setIsCreateModalOpen((prev) => !prev);
+
+  const toggleEditModal = () => setIsEditModalOpen((prev) => !prev);
 
   const handleDelete = async (playlistId) => {
     if (window.confirm("Tem certeza que deseja excluir esta playlist?")) {
-      const result = await deletePlaylist(playlistId);  
+      const result = await deletePlaylist(playlistId);
       if (result.success) {
         alert("Playlist excluída com sucesso!");
-        updatePlaylists(playlists.filter((playlist) => playlist._id !== playlistId)); 
+        updatePlaylists(playlists.filter((playlist) => playlist._id !== playlistId));
       } else {
         alert("Erro ao excluir a playlist: " + deleteError);
       }
     }
+  };
+
+  const handleEdit = (playlist) => {
+    setSelectedPlaylist(playlist);
+    toggleEditModal(); 
   };
 
   if (loading) {
@@ -48,11 +54,9 @@ const PlaylistsList = () => {
             <PlaylistItem key={playlist._id}>
               <h3>{playlist._name}</h3>
               <p>{playlist._description || "Sem descrição"}</p>
-              <button
-                onClick={() => handleDelete(playlist._id)}
-                disabled={deleting}
-              >
-                {deleting ? "Excluindo..." : "Excluir"}
+              <button onClick={() => handleEdit(playlist)}>Editar</button>
+              <button onClick={() => handleDelete(playlist._id)} disabled={deleting}>
+                {deleting ? <LoadingGif src={loadingGif} alt="Deletando playlist..." />: "Excluir"}
               </button>
             </PlaylistItem>
           ))}
@@ -61,9 +65,14 @@ const PlaylistsList = () => {
         <p>Você ainda não criou nenhuma playlist.</p>
       )}
 
-      <button onClick={toggleModal}>Criar Nova Playlist</button>
+      <button onClick={toggleCreateModal}>Criar Nova Playlist</button>
+      <CreatePlaylistModal isOpen={isCreateModalOpen} onClose={toggleCreateModal} />
 
-      <CreatePlaylistModal isOpen={isModalOpen} onClose={toggleModal} />
+      <EditPlaylistModal
+        isOpen={isEditModalOpen}
+        onClose={toggleEditModal}
+        playlist={selectedPlaylist}
+      />
     </div>
   );
 };
