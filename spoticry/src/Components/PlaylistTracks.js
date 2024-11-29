@@ -3,12 +3,14 @@ import axios from "axios";
 import { LoadingGif } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
+import { useCoordinator } from "../hooks/useCoordinator";
 
 const PlaylistTracks = ({ playlistId }) => {
   const [tracks, setTracks] = useState([]); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("spoticry_token");
+  const {goToSong} = useCoordinator()
 
   const fetchPlaylistTracks = async () => {
     setLoading(true);
@@ -68,14 +70,15 @@ const PlaylistTracks = ({ playlistId }) => {
       {loading && <LoadingGif src={loadingGif} alt="Carregando..." />}
       {error && <p>{error}</p>}
 
-      <div>
+      <div className="tracks-container">
         {tracks.length > 0 ? (
           tracks.map((track) => (
-            <div key={track.id}>
+            <div key={track.id} className="track-item">
               <p>
                 <strong>{track.title}</strong> - {track.artist}
               </p>
               <button onClick={() => removeSongFromPlaylist(track.id)}>Remover</button>
+              <button onClick={()=>goToSong(track.id)}>Ver Detalhes</button>
             </div>
           ))
         ) : (

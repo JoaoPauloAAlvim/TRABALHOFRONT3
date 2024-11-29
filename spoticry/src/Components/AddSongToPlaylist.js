@@ -4,7 +4,7 @@ import { LoadingGif } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 
-const AddSongToPlaylist = ({ selectedPlaylistId }) => {
+const AddSongToPlaylist = ({ playlistId }) => {
   const [selectedSong, setSelectedSong] = useState("");
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ const AddSongToPlaylist = ({ selectedPlaylistId }) => {
       }
 
       const response = await axios.post(
-        `${URL_BASE}/playlist/${selectedPlaylistId}/song`,
+        `${URL_BASE}/playlist/${playlistId}/song`,
         { songId: selectedSong },
         {
           headers: {

@@ -5,6 +5,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import Login from "./Login";
 import Playlists from"./Playlists";
 import Playlist from "./Playlist";
+import Track from "./Track";
 
 const Router = () => {
   return (
@@ -13,8 +14,8 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/playlists" element={<Playlists />} />
-        <Route path="/playlists/playlist/:id" element={<Playlist />} />
-        {/* <Route path="/song" element={<Song />} />  */}
+        <Route path="/playlists/playlist/:playlistId" element={<Playlist />} />
+        <Route path="/song/:songId" element={<Track />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
