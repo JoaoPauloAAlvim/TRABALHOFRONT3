@@ -6,7 +6,7 @@ import Login from "./Login";
 import Playlists from"./Playlists";
 import Playlist from "./Playlist";
 import Track from "./Track";
-
+import Songs from"./Songs";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -15,7 +15,8 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/playlists" element={<Playlists />} />
         <Route path="/playlists/playlist/:playlistId" element={<Playlist />} />
-        <Route path="/song/:songId" element={<Track />} />
+        <Route path="/song/:trackId" element={<Track />} />
+        <Route path="/mysongs" element={<Songs />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

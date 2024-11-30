@@ -19,7 +19,6 @@ export const Input = () => {
 
     login(form)
       .then((token) => {
-        console.log("Token recebido:", token);
         goToPlaylists()
       })
       .catch((error) => {

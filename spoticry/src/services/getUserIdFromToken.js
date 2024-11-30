@@ -9,3 +9,4 @@ export const getUserIdFromToken = (token) => {
       return null;
     }
   };
+export default getUserIdFromToken;

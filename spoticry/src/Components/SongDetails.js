@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
 
-const SongDetails = ({ songId }) => {
+const SongDetails = ({ trackId }) => {
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,7 +10,7 @@ const SongDetails = ({ songId }) => {
 
   const fetchSongDetails = async () => {
     try {
-      const response = await axios.get(`${URL_BASE}/song/${songId}`, {
+      const response = await axios.get(`${URL_BASE}/song/${trackId}`, {
         headers: { Authorization: token },
       });
       setSong(response.data.song);
@@ -22,10 +22,10 @@ const SongDetails = ({ songId }) => {
   };
 
   useEffect(() => {
-    if (songId) {
+    if (trackId) {
       fetchSongDetails();
     }
-  }, [songId]);
+  }, [trackId]);
 
   return (
     <div>

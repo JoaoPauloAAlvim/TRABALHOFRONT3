@@ -10,7 +10,7 @@ const PlaylistTracks = ({ playlistId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("spoticry_token");
-  const {goToSong} = useCoordinator()
+  const { goToTrack } = useCoordinator();
 
   const fetchPlaylistTracks = async () => {
     setLoading(true);
@@ -70,20 +70,20 @@ const PlaylistTracks = ({ playlistId }) => {
       {loading && <LoadingGif src={loadingGif} alt="Carregando..." />}
       {error && <p>{error}</p>}
 
-      <div className="tracks-container">
-        {tracks.length > 0 ? (
+      <div>
+        {!loading && tracks.length > 0 && (
           tracks.map((track) => (
-            <div key={track.id} className="track-item">
+            <div key={track.id}>
               <p>
                 <strong>{track.title}</strong> - {track.artist}
               </p>
               <button onClick={() => removeSongFromPlaylist(track.id)}>Remover</button>
-              <button onClick={()=>goToSong(track.id)}>Ver Detalhes</button>
+              <button onClick={() => goToTrack(track.id)}>Ver Detalhes</button>
             </div>
           ))
-        ) : (
-          <p>Sem músicas na playlist</p>
         )}
+
+        {!loading && tracks.length === 0 && <p>Sem músicas na playlist</p>}
       </div>
     </div>
   );

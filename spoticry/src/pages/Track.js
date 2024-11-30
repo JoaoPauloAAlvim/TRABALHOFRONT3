@@ -3,9 +3,9 @@ import React from "react";
 import SongDetails from "../Components/SongDetails";
 
 const Track =()=>{
-    const { songId } = useParams();
+    const { trackId } = useParams();
     return<>
-        <SongDetails songId={songId}></SongDetails>
+        <SongDetails trackIdId={trackId}></SongDetails>
     </>
 }
 

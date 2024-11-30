@@ -8,7 +8,8 @@ export const useCoordinator = () => {
   const goBack = () => navigate(-1);
   const goToPlaylists = () => navigate("/playlists");
   const goToPlaylist = (playlistId) => navigate(`/playlists/playlist/${playlistId}`);
-  const goToSong = (songId) => navigate(`/song/${songId}`);
+  const goToTrack = (trackId) => navigate(`/song/${trackId}`);
+  const goToMySongs= () => navigate("/mysongs");
 
-  return { goToLogin, goToHome, goBack, goToPlaylists, goToPlaylist, goToSong };
+  return { goToLogin, goToHome, goBack, goToPlaylists, goToPlaylist, goToTrack,goToMySongs };
 };

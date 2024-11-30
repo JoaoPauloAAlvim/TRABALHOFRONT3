@@ -24,7 +24,6 @@ const AddSongToPlaylist = ({ playlistId }) => {
           Authorization: token,
         },
       });
-      console.log("Músicas carregadas:", response.data);
       setSongs(response.data.songs); 
       setLoading(false);
     } catch (err) {
