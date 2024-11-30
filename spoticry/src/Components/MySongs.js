@@ -5,7 +5,7 @@ import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 import getUserIdFromToken from "../services/getUserIdFromToken"
 
-const MySongs = () => {
+const MySongs = ({ onEdit }) => {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,15 +17,14 @@ const MySongs = () => {
     try {
       const response = await axios.get(`${URL_BASE}/song`, {
         headers: {
-          Authorization: token,
-        },
-      });
-      console.log(response.data)
-      const myUserId = getUserIdFromToken(token)
-      const userSongs = response.data.songs.filter(
-        (song) => song.userId === myUserId
-      );
-      setSongs(userSongs);
+        Authorization: token,
+      },
+    });
+    const myUserId = getUserIdFromToken(token);
+    const userSongs = response.data.songs.filter(
+      (song) => song.userId === myUserId
+    );
+    setSongs(userSongs);
     } catch (err) {
       console.error("Erro ao carregar músicas:", err);
       setError("Erro ao carregar suas músicas.");
@@ -33,7 +32,7 @@ const MySongs = () => {
       setLoading(false);
     }
   };
-
+  
   const deleteSong = async (songId) => {
     if (!window.confirm("Você tem certeza que deseja excluir esta música?")) {
       return;
@@ -66,15 +65,16 @@ const MySongs = () => {
 
       {songs.length > 0 ? (
         <ul>
-          {songs.map((song) => (
-            <li key={song.id}>
-              <p>
-                <strong>{song.title}</strong> - {song.artist}
-              </p>
-              <button onClick={() => deleteSong(song.id)}>Excluir</button>
-            </li>
-          ))}
-        </ul>
+        {songs.map((song) => (
+          <li key={song.id}>
+            <p>
+              <strong>{song.title}</strong> - {song.artist}
+            </p>
+            <button onClick={() => onEdit(song)}>Editar</button>
+            <button onClick={() => deleteSong(song.id)}>Excluir</button>
+          </li>
+        ))}
+      </ul>
       ) : (
         !loading && <p>Você não possui músicas criadas.</p>
       )}

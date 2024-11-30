@@ -1,44 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
 import { LoadingGif } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 
-const CreateSongModal = ({ isOpen, onClose }) => {
+const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [url, setUrl] = useState("");
-  const [creating, setCreating] = useState(false);
-  const [creationError, setCreationError] = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [editError, setEditError] = useState(null);
 
   const token = localStorage.getItem("spoticry_token");
 
+  useEffect(() => {
+    if (song) {
+      setTitle(song.title || "");
+      setArtist(song.artist || "");
+      setUrl(song.url || "");
+    }
+  }, [song]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setCreating(true);
-    setCreationError(null);
+    setEditing(true); 
+    setEditError(null);  
 
-    const newSong = { title, artist, url };
+    const updatedSong = { title, artist, url };
 
     try {
-      await axios.post(`${URL_BASE}/song`, newSong, {
+      await axios.patch(`${URL_BASE}/song/${song.id}`, updatedSong, {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
       });
 
-      alert("Música criada com sucesso!");
-      setTitle("");
-      setArtist("");
-      setUrl("");
+      alert("Música editada com sucesso!");
+      onSave(); 
       onClose(); 
     } catch (error) {
-      console.error("Erro ao criar música:", error);
-      setCreationError("Erro ao criar música. Por favor, tente novamente.");
+      console.error("Erro ao editar música:", error);
+      setEditError("Erro ao editar música. Por favor, tente novamente.");
     } finally {
-      setCreating(false);
+      setEditing(false);  
     }
   };
 
@@ -46,9 +52,9 @@ const CreateSongModal = ({ isOpen, onClose }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      contentLabel="Adicionar Nova Música"
+      contentLabel="Editar Música"
     >
-      <h2>Adicionar Nova Música</h2>
+      <h2>Editar Música</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Título:</label>
@@ -77,20 +83,20 @@ const CreateSongModal = ({ isOpen, onClose }) => {
             required
           />
         </div>
-        <button type="submit" disabled={creating}>
-          {creating ? (
+        <button type="submit" disabled={editing}>
+          {editing ? (
             <LoadingGif src={loadingGif} alt="Carregando..." />
           ) : (
-            "Adicionar Música"
+            "Salvar Alterações"
           )}
         </button>
         <button type="button" onClick={onClose}>
           Cancelar
         </button>
       </form>
-      {creationError && <p>{creationError}</p>}
+      {editError && <p>{editError}</p>}
     </Modal>
   );
 };
 
-export default CreateSongModal;
+export default EditSongModal;
