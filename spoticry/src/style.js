@@ -90,61 +90,79 @@ export const ImageSection = styled.img`
 `;
 
 export const NavStyled = styled.div`
-    background-color: ${colors.slateGray};
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    justify-items: center;
-    align-items: center;
-    padding: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; 
+  padding: 20px; 
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-    @media (max-width: 600px) {
-        grid-template-columns: 1fr;
-        padding: 20px;
-    }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const CardContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    height: 180px;
-    text-align: center;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 300px;
+  margin: auto;
 
-    @media (max-width: 600px) {
-        width: 150px;
-        height: 150px;
-        margin: 5px;
-    }
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #666;
+  }
 `;
 
 export const CardImage = styled.img`
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-bottom: 10px;
-
-    @media (max-width: 600px) {
-        width: 60px;
-        height: 60px;
-    }
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 5px solid #f5f5f5;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 `;
+
 
 export const CardText = styled.p`
-    font-size: 16px;
-    color: ${colors.charcoal};
+  font-size: 16px;
+  color: #666;
+  margin-top: 5px;
+  text-align: center;
 
-    @media (max-width: 600px) {
-        font-size: 14px;
-    }
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
 `;
+
 
 export const FooterStyled = styled.footer`
     display: flex;
