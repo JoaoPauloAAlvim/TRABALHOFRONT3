@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
-import { LoadingGif } from "../style";
+import { Button, CancelButton, ErrorMessage, Input, LoadingGif, ModalActions, ModalContainer, ModalContent, ModalTitle } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 
 const CreateSongModal = ({ isOpen, onClose }) => {
@@ -48,11 +48,13 @@ const CreateSongModal = ({ isOpen, onClose }) => {
       onRequestClose={onClose}
       contentLabel="Adicionar Nova Música"
     >
-      <h2>Adicionar Nova Música</h2>
+      <ModalContainer>
+      <ModalTitle>Adicionar Nova Música</ModalTitle>
+      <ModalContent>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Título:</label>
-          <input
+          <Input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -61,7 +63,7 @@ const CreateSongModal = ({ isOpen, onClose }) => {
         </div>
         <div>
           <label>Artista:</label>
-          <input
+          <Input
             type="text"
             value={artist}
             onChange={(e) => setArtist(e.target.value)}
@@ -70,25 +72,29 @@ const CreateSongModal = ({ isOpen, onClose }) => {
         </div>
         <div>
           <label>URL:</label>
-          <input
+          <Input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
           />
         </div>
-        <button type="submit" disabled={creating}>
+        <ModalActions>
+        <Button type="submit" disabled={creating}>
           {creating ? (
             <LoadingGif src={loadingGif} alt="Carregando..." />
           ) : (
             "Adicionar Música"
           )}
-        </button>
-        <button type="button" onClick={onClose}>
+        </Button>
+        <CancelButton type="button" onClick={onClose}>
           Cancelar
-        </button>
+        </CancelButton>
+        </ModalActions>
       </form>
-      {creationError && <p>{creationError}</p>}
+      </ModalContent>
+      {creationError && <ErrorMessage>{creationError}</ErrorMessage>}
+      </ModalContainer>
     </Modal>
   );
 };

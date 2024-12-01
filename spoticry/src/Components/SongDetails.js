@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
+import { LoadingGif, SongContainer, SongTitle, SongArtist, SongLink, ErrorMessage } from "../style";
+import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 
 const SongDetails = ({ trackId }) => {
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("spoticry_token")
+  const token = localStorage.getItem("spoticry_token");
 
   const fetchSongDetails = async () => {
     try {
@@ -28,20 +30,20 @@ const SongDetails = ({ trackId }) => {
   }, [trackId]);
 
   return (
-    <div>
+    <SongContainer>
       <h2>Detalhes da Música</h2>
-      {loading && <p>Carregando...</p>}
-      {error && <p>{error}</p>}
+      {loading && <LoadingGif src={loadingGif} alt="Carregando" />}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       {song && (
         <div>
-          <h3>{song.title}</h3>
-          <p>Artista: {song.artist}</p>
-          <a href={song.url} target="_blank" rel="noopener noreferrer">
+          <SongTitle>{song.title}</SongTitle>
+          <SongArtist>Artista: {song.artist}</SongArtist>
+          <SongLink href={song.url} target="_blank" rel="noopener noreferrer">
             Assistir no YouTube
-          </a>
+          </SongLink>
         </div>
       )}
-    </div>
+    </SongContainer>
   );
 };
 

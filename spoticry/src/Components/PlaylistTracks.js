@@ -4,6 +4,7 @@ import { LoadingGif } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 import { useCoordinator } from "../hooks/useCoordinator";
+import { Container, Title, TrackList, TrackItem, TrackTitle, TrackArtist, Button, ErrorText } from "../style";
 
 const PlaylistTracks = ({ playlistId }) => {
   const [tracks, setTracks] = useState([]); 
@@ -65,27 +66,30 @@ const PlaylistTracks = ({ playlistId }) => {
   }, [playlistId]);
 
   return (
-    <div>
-      <h2>Músicas da Playlist</h2>
+    <Container>
+      <Title>Músicas da Playlist</Title>
       {loading && <LoadingGif src={loadingGif} alt="Carregando..." />}
-      {error && <p>{error}</p>}
+      {error && <ErrorText>{error}</ErrorText>}
 
-      <div>
+      <TrackList>
         {!loading && tracks.length > 0 && (
           tracks.map((track) => (
-            <div key={track.id}>
-              <p>
-                <strong>{track.title}</strong> - {track.artist}
-              </p>
-              <button onClick={() => removeSongFromPlaylist(track.id)}>Remover</button>
-              <button onClick={() => goToTrack(track.id)}>Ver Detalhes</button>
-            </div>
+            <TrackItem key={track.id}>
+              <div>
+                <TrackTitle>{track.title}</TrackTitle>
+                <TrackArtist>{track.artist}</TrackArtist>
+              </div>
+              <div>
+                <Button onClick={() => removeSongFromPlaylist(track.id)}>Remover</Button>
+                <Button onClick={() => goToTrack(track.id)}>Ver Detalhes</Button>
+              </div>
+            </TrackItem>
           ))
         )}
 
         {!loading && tracks.length === 0 && <p>Sem músicas na playlist</p>}
-      </div>
-    </div>
+      </TrackList>
+    </Container>
   );
 };
 

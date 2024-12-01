@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { LoadingGif } from "../style";
+import { ErrorMessage, LoadingGif, SongsContainer, SongItem, SongList, SongTitle, ActionButton } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 import getUserIdFromToken from "../services/getUserIdFromToken"
@@ -58,27 +58,27 @@ const MySongs = ({ onEdit }) => {
   }, []);
 
   return (
-    <div>
+    <SongsContainer>
       <h1>Minhas Músicas</h1>
       {loading && <LoadingGif src={loadingGif} alt="Carregando..." />}
-      {error && <p>{error}</p>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       {songs.length > 0 ? (
-        <ul>
+        <SongList>
         {songs.map((song) => (
-          <li key={song.id}>
-            <p>
+          <SongItem key={song.id}>
+            <SongTitle>
               <strong>{song.title}</strong> - {song.artist}
-            </p>
-            <button onClick={() => onEdit(song)}>Editar</button>
-            <button onClick={() => deleteSong(song.id)}>Excluir</button>
-          </li>
+            </SongTitle>
+            <ActionButton onClick={() => onEdit(song)}>Editar</ActionButton>
+            <ActionButton onClick={() => deleteSong(song.id)}>Excluir</ActionButton>
+          </SongItem>
         ))}
-      </ul>
+      </SongList>
       ) : (
         !loading && <p>Você não possui músicas criadas.</p>
       )}
-    </div>
+    </SongsContainer>
   );
 };
 

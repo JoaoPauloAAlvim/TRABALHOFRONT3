@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "../hooks/useForm";
 import { login } from "../services/auth";
-import { Form, InputField, Label, LoginContainer, Title, ErrorMessage,LoadingGif} from "../style";
+import { Form, InputField, Label, LoginContainer, ErrorMessage,LoadingGif, TitleLogin} from "../style";
 import { Button } from "./Button";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif"
 import  { useCoordinator } from "../hooks/useCoordinator"
@@ -32,7 +32,7 @@ export const Input = () => {
 
   return (
     <LoginContainer>
-      <Title>Entre no Spoticry</Title>
+      <TitleLogin>Entre no Spoticry</TitleLogin>
       <Form onSubmit={handleLogin}>
         <Label>Email</Label>
         <InputField

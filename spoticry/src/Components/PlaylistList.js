@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { usePlaylistContext } from "../contexts/PlaylistContext";
-import { LoadingGif, PlaylistItem } from "../style";
+import { LoadingGif, GlobalStyle,Container,Title,PlaylistListContainer,NoPlaylistsMessage,CreatePlaylistButton,PlaylistItemStyled } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import { usePlaylistsById } from "../hooks/usePlaylistsById";
 import { useDeletePlaylist } from "../hooks/useDeletePlaylist";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import EditPlaylistModal from "./EditPlaylistModal";
 import { useCoordinator } from "../hooks/useCoordinator";
+
+
 
 const PlaylistsList = () => {
   const { playlists, updatePlaylists } = usePlaylistContext();
@@ -45,7 +47,7 @@ const PlaylistsList = () => {
   };
 
   const handleGoToPlaylist = (playlistId) => {
-    goToPlaylist(playlistId); 
+    goToPlaylist(playlistId);
   };
 
   if (loading) {
@@ -58,47 +60,51 @@ const PlaylistsList = () => {
   }
 
   return (
-    <div>
-      <h1>Minhas Playlists</h1>
-      {Array.isArray(playlists) && playlists.length > 0 ? (
-        <ul>
-          {playlists.map((playlist) => (
-            <PlaylistItem key={playlist._id}>
-              <h3>{playlist._name}</h3>
-              <p>{playlist._description || "Sem descrição"}</p>
-              <button onClick={() => handleEdit(playlist)}>Editar</button>
-              <button
-                onClick={() => handleDelete(playlist._id)}
-                disabled={deleting}
-              >
-                {deleting ? (
-                  <LoadingGif src={loadingGif} alt="Deletando playlist..." />
-                ) : (
-                  "Excluir"
-                )}
-              </button>
-              <button onClick={() => handleGoToPlaylist(playlist._id)}>
-                Ir para Músicas
-              </button>
-            </PlaylistItem>
-          ))}
-        </ul>
-      ) : (
-        <p>Você ainda não criou nenhuma playlist.</p>
-      )}
+    <>
+      <GlobalStyle />
+      <Container>
+        <Title>Minhas Playlists</Title>
+        {Array.isArray(playlists) && playlists.length > 0 ? (
+          <PlaylistListContainer>
+            {playlists.map((playlist) => (
+              <PlaylistItemStyled key={playlist._id}>
+                <h3>{playlist._name}</h3>
+                <p>{playlist._description || "Sem descrição"}</p>
+                <button onClick={() => handleEdit(playlist)}>Editar</button>
+                <button
+                  onClick={() => handleDelete(playlist._id)}
+                  disabled={deleting}
+                >
+                  {deleting ? (
+                    <LoadingGif src={loadingGif} alt="Deletando playlist..." />
+                  ) : (
+                    "Excluir"
+                  )}
+                </button>
+                <button onClick={() => handleGoToPlaylist(playlist._id)}>
+                  Ir para Músicas
+                </button>
+              </PlaylistItemStyled>
+            ))}
+          </PlaylistListContainer>
+        ) : (
+          <NoPlaylistsMessage>Você ainda não criou nenhuma playlist.</NoPlaylistsMessage>
+        )}
 
-      <button onClick={toggleCreateModal}>Criar Nova Playlist</button>
-      <CreatePlaylistModal
-        isOpen={isCreateModalOpen}
-        onClose={toggleCreateModal}
-      />
+        <CreatePlaylistButton onClick={toggleCreateModal}>Criar Nova Playlist</CreatePlaylistButton>
 
-      <EditPlaylistModal
-        isOpen={isEditModalOpen}
-        onClose={toggleEditModal}
-        playlist={selectedPlaylist}
-      />
-    </div>
+        <CreatePlaylistModal
+          isOpen={isCreateModalOpen}
+          onClose={toggleCreateModal}
+        />
+
+        <EditPlaylistModal
+          isOpen={isEditModalOpen}
+          onClose={toggleEditModal}
+          playlist={selectedPlaylist}
+        />
+      </Container>
+    </>
   );
 };
 

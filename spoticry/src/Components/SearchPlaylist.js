@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { LoadingGif, PlaylistItem } from "../style";
+import { LoadingGif, PlaylistItem, SearchContainer, SearchInput, SearchButton, ErrorMessage } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 import getUserIdFromToken from "../services/getUserIdFromToken";
@@ -11,7 +11,7 @@ const SearchMyPlaylists = () => {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {goToPlaylist} = useCoordinator()
+  const { goToPlaylist } = useCoordinator();
 
   const token = localStorage.getItem("spoticry_token");
 
@@ -34,7 +34,7 @@ const SearchMyPlaylists = () => {
         }
       );
 
-      const userId = getUserIdFromToken(token)
+      const userId = getUserIdFromToken(token);
       const myPlaylists = response.data.playlists.filter(
         (playlist) => playlist._userId === userId
       );
@@ -49,25 +49,25 @@ const SearchMyPlaylists = () => {
   };
 
   return (
-    <div>
+    <SearchContainer>
       <h2>Buscar Minhas Playlists</h2>
       <div>
-        <input
+        <SearchInput
           type="text"
           placeholder="Nome da Playlist"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={handleSearch} disabled={loading}>
+        <SearchButton onClick={handleSearch} disabled={loading}>
           {loading ? (
             <LoadingGif src={loadingGif} alt="Carregando..." />
           ) : (
             "Buscar"
           )}
-        </button>
+        </SearchButton>
       </div>
 
-      {error && <p>{error}</p>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       {playlists.length > 0 ? (
         <ul>
@@ -84,7 +84,7 @@ const SearchMyPlaylists = () => {
       ) : (
         !loading && <p>Nenhuma playlist encontrada.</p>
       )}
-    </div>
+    </SearchContainer>
   );
 };
 

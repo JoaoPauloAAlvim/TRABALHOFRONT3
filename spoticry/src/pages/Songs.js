@@ -5,9 +5,8 @@ import CreateSongModal from "../Components/CreateSongModal";
 import EditSongModal from "../Components/EditSongModal";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
-import { LoadingGif } from "../style";
-import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import getUserIdFromToken from "../services/getUserIdFromToken";
+import { Button } from "../style";
 
 const Songs = () => {
   const [songs, setSongs] = useState([]);
@@ -65,7 +64,7 @@ const Songs = () => {
     <>
       <MySongs onEdit={openEditModal} songs={songs} /> 
       <h2>Adicione sua própria música à plataforma</h2>
-      <button onClick={openCreateModal}>Adicionar Nova Música</button>
+      <Button onClick={openCreateModal}>Adicionar Nova Música</Button>
 
       <CreateSongModal isOpen={isCreateModalOpen} onClose={closeCreateModal} />
 

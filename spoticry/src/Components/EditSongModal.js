@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
-import { LoadingGif } from "../style";
+import { Button, ErrorMessage, LoadingGif, ModalActions, ModalContainer, ModalTitle,Input,ModalContent} from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 
 const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
@@ -53,12 +53,13 @@ const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Editar Música"
-    >
-      <h2>Editar Música</h2>
+    ><ModalContainer>
+      <ModalTitle>Editar Música</ModalTitle>
+      <ModalContent>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Título:</label>
-          <input
+          <Input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -67,7 +68,7 @@ const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
         </div>
         <div>
           <label>Artista:</label>
-          <input
+          <Input
             type="text"
             value={artist}
             onChange={(e) => setArtist(e.target.value)}
@@ -76,25 +77,29 @@ const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
         </div>
         <div>
           <label>URL:</label>
-          <input
+          <Input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
           />
         </div>
-        <button type="submit" disabled={editing}>
+        <ModalActions>
+        <Button type="submit" disabled={editing}>
           {editing ? (
             <LoadingGif src={loadingGif} alt="Carregando..." />
           ) : (
             "Salvar Alterações"
           )}
-        </button>
-        <button type="button" onClick={onClose}>
+        </Button>
+        <Button type="button" onClick={onClose}>
           Cancelar
-        </button>
+        </Button>
+        </ModalActions>
       </form>
-      {editError && <p>{editError}</p>}
+      </ModalContent>
+      {editError && <ErrorMessage>{editError}</ErrorMessage>}
+      </ModalContainer>
     </Modal>
   );
 };

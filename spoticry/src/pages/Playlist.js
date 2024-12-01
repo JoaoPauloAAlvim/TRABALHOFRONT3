@@ -3,6 +3,7 @@ import AddSongToPlaylist from "../Components/AddSongToPlaylist";
 import { useParams } from "react-router-dom";
 import PlaylistTracks from "../Components/PlaylistTracks";
 import { useCoordinator } from "../hooks/useCoordinator";
+import { Button } from "../style";
 
 
 const PlaylistPage = () => {
@@ -13,7 +14,7 @@ const PlaylistPage = () => {
       <h1>Gerenciar Playlist</h1>
       <PlaylistTracks playlistId={playlistId} />
       <AddSongToPlaylist playlistId={playlistId} />
-      <button onClick={()=>goToMySongs()}>Ver minhas músicas</button>
+      <Button onClick={()=>goToMySongs()}>Ver minhas músicas</Button>
     </div>
   );
 };

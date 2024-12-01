@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { LoadingGif } from "../style";
+import { Button, Container, Label, LoadingGif, Select, Title } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 
@@ -71,14 +71,14 @@ const AddSongToPlaylist = ({ playlistId }) => {
   };
 
   return (
-    <div>
-      <h2>Adicionar Música à Playlist</h2>
+    <Container>
+      <Title>Adicionar Música à Playlist</Title>
       {loading && <LoadingGif src={loadingGif} alt="Carregando..." />}
       {error && <p>{error}</p>}
 
       <div>
-        <label>Selecione a Música:</label>
-        <select
+        <Label>Selecione a Música:</Label>
+        <Select
           value={selectedSong}
           onChange={(e) => setSelectedSong(e.target.value)}
         >
@@ -92,13 +92,13 @@ const AddSongToPlaylist = ({ playlistId }) => {
           ) : (
             <option disabled>Sem músicas disponíveis</option>
           )}
-        </select>
+        </Select>
       </div>
 
-      <button onClick={handleAddSongToPlaylist} disabled={loading}>
+      <Button onClick={handleAddSongToPlaylist} disabled={loading}>
         {loading ? <LoadingGif src={loadingGif} alt="Adicionando Música..." /> : "Adicionar Música"}
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 };
 

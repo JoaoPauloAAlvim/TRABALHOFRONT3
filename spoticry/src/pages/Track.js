@@ -5,7 +5,7 @@ import SongDetails from "../Components/SongDetails";
 const Track =()=>{
     const { trackId } = useParams();
     return<>
-        <SongDetails trackIdId={trackId}></SongDetails>
+        <SongDetails trackId={trackId}></SongDetails>
     </>
 }
 

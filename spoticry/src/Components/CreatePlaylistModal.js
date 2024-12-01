@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useCreatePlaylist } from "../hooks/useCreatePlaylist";
-import { LoadingGif } from "../style";
+import { LoadingGif,ModalContainer,ModalTitle,ModalContent,Input,Textarea,ModalActions,Button,CancelButton } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import { ErrorMessage } from "../style";
+
+
 
 const CreatePlaylistModal = ({ isOpen, onClose }) => {
   const [name, setName] = useState("");
@@ -35,32 +37,38 @@ const CreatePlaylistModal = ({ isOpen, onClose }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} contentLabel="Criar Nova Playlist">
-      <h2>Criar Nova Playlist</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome da Playlist:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Descrição (opcional):</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <button type="submit" disabled={creating}>
-          {creating ? <LoadingGif src={loadingGif} alt="Carregando..." /> : "Criar Playlist"}
-        </button>
-        <button type="button" onClick={onClose}>
-          Cancelar
-        </button>
-      </form>
-      {creationError && <ErrorMessage>{creationError}</ErrorMessage>}
+      <ModalContainer>
+        <ModalTitle>Criar Nova Playlist</ModalTitle>
+        <ModalContent>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Nome da Playlist:</label>
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Descrição (opcional):</label>
+              <Textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+            <ModalActions>
+              <Button type="submit" disabled={creating}>
+                {creating ? <LoadingGif src={loadingGif} alt="Carregando..." /> : "Criar Playlist"}
+              </Button>
+              <CancelButton type="button" onClick={onClose}>
+                Cancelar
+              </CancelButton>
+            </ModalActions>
+          </form>
+        </ModalContent>
+        {creationError && <ErrorMessage>{creationError}</ErrorMessage>}
+      </ModalContainer>
     </Modal>
   );
 };
