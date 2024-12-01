@@ -770,3 +770,35 @@ export const ActionButton = styled.button`
     background-color: ${colors.slateGray};
   }
 `;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  color: #343a40;
+`;
+
+export const ErrorTitle = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+`;
+
+export const ErrorSubtitle = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 1rem;
+`;
+
+export const BackButton = styled.a`
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
