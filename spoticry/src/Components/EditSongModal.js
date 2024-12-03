@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import URL_BASE from "../Constants/URL_BASE";
-import { Button, ErrorMessage, LoadingGif, ModalActions, ModalContainer, ModalTitle,Input,ModalContent} from "../style";
+import { Button, ErrorMessage, LoadingGif, ModalActions,Backdrop, ModalContainer, ModalTitle,Input,ModalContent} from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 
 const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
@@ -49,11 +49,10 @@ const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel="Editar Música"
-    ><ModalContainer>
+    <>
+    {isOpen && (
+      <Backdrop onClick={onClose}>
+     <ModalContainer onClick={(e) => e.stopPropagation()}>
       <ModalTitle>Editar Música</ModalTitle>
       <ModalContent>
       <form onSubmit={handleSubmit}>
@@ -100,7 +99,9 @@ const EditSongModal = ({ isOpen, onClose, song, onSave }) => {
       </ModalContent>
       {editError && <ErrorMessage>{editError}</ErrorMessage>}
       </ModalContainer>
-    </Modal>
+      </Backdrop>
+      )}
+      </>
   );
 };
 

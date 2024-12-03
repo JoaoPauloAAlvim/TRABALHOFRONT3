@@ -1,99 +1,117 @@
 import styled from "styled-components";
 import colors from "./Constants/colors";
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const ButtonStyled = styled.button`
-    width: 100px;
-    height: 50px;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${colors.white};
-    color: ${colors.charcoal};
-    border: none;
-    cursor: pointer;
-    
-    &:hover {
-        background-color: ${colors.slateGray};
-    }
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.white};
+  color: ${colors.charcoal};
+  border: none;
+  cursor: pointer;
 
-    @media (max-width: 600px) {
-        width: 80px;
-        height: 40px;
-        font-size: 14px;
-    }
+  &:hover {
+    background-color: ${colors.slateGray};
+  }
+
+  @media (max-width: 600px) {
+    width: 80px;
+    height: 40px;
+    font-size: 14px;
+  }
 `;
 
 export const HeaderStyled = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: ${colors.charcoal};
-    color: ${colors.white};
-    height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: ${colors.charcoal};
+  color: ${colors.white};
+  height: 100px;
 
-    @media (max-width: 600px) {
-        padding: 0 15px;
-        height: 80px;
-    }
+  @media (max-width: 600px) {
+    padding: 0 15px;
+    height: 80px;
+  }
 `;
 
 export const HeaderLogo = styled.img`
-    width: 100px;
-    height: auto;
-    margin-right: 20px;
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
 
-    @media (max-width: 768px) {
-        margin-bottom: 10px;
-    }
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const SectionStyled = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    height: 400px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  height: 400px;
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-        padding: 10px;
-    }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px;
+  }
 `;
 
 export const TextContainer = styled.div`
-    flex: 1;
-    text-align: left;
-    white-space: pre-line;
+  flex: 1;
+  text-align: left;
+  white-space: pre-line;
 
-    @media (max-width: 768px) {
-        text-align: center;
-    }
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 export const ImageSection = styled.img`
-    max-width: 50%;
-    height: auto;
-    object-fit: cover;
+  max-width: 50%;
+  height: auto;
+  object-fit: cover;
+  opacity: 0.8;
+  filter: grayscale(50%);
 
-    @media (max-width: 768px) {
-        max-width: 80%;
-        margin-top: 10px;
-    }
+  @media (max-width: 768px) {
+    max-width: 80%;
+    margin-top: 10px;
+  }
+
+  border: 2px solid #f5f5f5;
+  border-radius: 10px;
+
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
 `;
 
 export const NavStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px; 
-  padding: 20px; 
+  gap: 20px;
+  padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -151,7 +169,6 @@ export const CardImage = styled.img`
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 `;
 
-
 export const CardText = styled.p`
   font-size: 16px;
   color: #666;
@@ -163,95 +180,94 @@ export const CardText = styled.p`
   }
 `;
 
-
 export const FooterStyled = styled.footer`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: ${colors.charcoal};
-    color: ${colors.white};
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${colors.charcoal};
+  color: ${colors.white};
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 export const FooterTop = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: center;
-    }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const FooterBottom = styled.div`
-    display: flex;
-    justify-content: center;
-    padding-top: 15px;
-    width: 100%;
-    font-size: 14px;
-    color: ${colors.white};
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  width: 100%;
+  font-size: 14px;
+  color: ${colors.white};
+  text-align: center;
 `;
 
 export const FooterLogo = styled.img`
-    width: 100px;
-    height: auto;
-    margin-right: 20px;
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
 
-    @media (max-width: 768px) {
-        margin-bottom: 10px;
-    }
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const FooterLinksStyled = styled.div`
-    display: flex;
-    justify-content: center;
-    flex: 1;
+  display: flex;
+  justify-content: center;
+  flex: 1;
 
-    @media (max-width: 600px) {
-        flex-direction: column;
-        align-items: center;
-    }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const FooterLink = styled.a`
-    color: ${colors.white};
-    text-decoration: none;
-    margin: 0 10px;
-    
-    &:hover {
-        text-decoration: underline;
-    }
+  color: ${colors.white};
+  text-decoration: none;
+  margin: 0 10px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const SocialLinksStyled = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
 
-    @media (max-width: 600px) {
-        justify-content: center;
-    }
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
 
 export const SocialIcon = styled.img`
-    width: 25px;
-    height: 25px;
-    transition: transform 0.3s;
-    
-    &:hover {
-        transform: scale(1.1);
-    }
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s;
 
-    @media (max-width: 600px) {
-        width: 20px;
-        height: 20px;
-    }
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const LoginContainer = styled.div`
@@ -267,17 +283,10 @@ export const LoginContainer = styled.div`
   border-radius: 8px;
 `;
 
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-`;
-
-export const Label = styled.p`
-  color: ${colors.white};
-  font-size: 0.9rem;
-  margin: 0.5rem 0;
 `;
 
 export const InputField = styled.input`
@@ -287,7 +296,7 @@ export const InputField = styled.input`
   border-radius: 4px;
   background-color: ${colors.charcoal};
   color: ${colors.white};
-  
+
   ::placeholder {
     color: ${colors.ivory};
   }
@@ -318,10 +327,8 @@ export const CenteredContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: ${colors.white}; 
+  background-color: ${colors.white};
 `;
-
-
 
 export const LoadingGif = styled.img`
   position: absolute;
@@ -335,15 +342,11 @@ export const LoadingGif = styled.img`
   z-index: 10;
 `;
 
-
-
-
 export const SearchContainer = styled.div`
   background-color: ${colors.charcoal};
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: ${colors.white};
-  
 
   @media (max-width: 768px) {
     padding: 15px;
@@ -389,8 +392,6 @@ export const SearchButton = styled.button`
     margin-bottom: 10px;
   }
 `;
-
-
 
 export const PlaylistItem = styled.li`
   list-style: none;
@@ -453,23 +454,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const Container = styled.div`
-  padding: 20px;
-  background-color: ${colors.white};
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  border 
-`;
-
 export const TitleLogin = styled.h1`
   color: ${colors.white};
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-export const Title = styled.h1`
-  color: ${colors.charcoal};
   font-size: 24px;
   margin-bottom: 20px;
 `;
@@ -477,6 +463,7 @@ export const Title = styled.h1`
 export const PlaylistListContainer = styled.ul`
   list-style: none;
   padding: 0;
+  margin-bottom: 15px;
   flex: 1;
   overflow-y: auto;
 `;
@@ -535,20 +522,22 @@ export const CreatePlaylistButton = styled.button`
   color: ${colors.white};
   border: none;
   padding: 10px 15px;
-  font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-start;
   transition: background-color 0.3s ease;
 
   &:hover {
     background-color: ${colors.slateGray};
   }
 
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-top: 15px;
+  &:disabled {
+    background-color: ${colors.slateGray};
+    cursor: not-allowed;
   }
 `;
+
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -559,6 +548,21 @@ export const ModalContainer = styled.div`
   background-color: ${colors.white};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+`;
+
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 export const ModalTitle = styled.h2`
@@ -569,12 +573,13 @@ export const ModalTitle = styled.h2`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 10px 15px;
   margin-bottom: 15px;
   border: 1px solid ${colors.slateGray};
   border-radius: 4px;
   background-color: ${colors.white};
   color: ${colors.charcoal};
+  box-sizing: border-box;
 
   &:focus {
     outline: 2px solid ${colors.navyBlue};
@@ -583,38 +588,17 @@ export const Input = styled.input`
 
 export const Textarea = styled.textarea`
   width: 100%;
-  padding: 10px;
+  padding: 10px 15px;
   margin-bottom: 15px;
   border: 1px solid ${colors.slateGray};
   border-radius: 4px;
   background-color: ${colors.white};
   color: ${colors.charcoal};
   resize: none;
+  box-sizing: border-box;
 
   &:focus {
     outline: 2px solid ${colors.navyBlue};
-  }
-`;
-
-export const Button = styled.button`
-  background-color: ${colors.charcoal};
-  color: ${colors.white};
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-
-  &:hover {
-    background-color: ${colors.slateGray};
-  }
-
-  &:disabled {
-    background-color: ${colors.slateGray};
-    cursor: not-allowed;
   }
 `;
 
@@ -643,56 +627,10 @@ export const ModalContent = styled.div`
   width: 100%;
 `;
 
-export const TrackList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-export const TrackItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${colors.beigeLight};
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    background-color: ${colors.slateGray};
-  }
-`;
-
-export const TrackTitle = styled.p`
-  color: ${colors.charcoal};
-  font-weight: bold;
-`;
-
-export const TrackArtist = styled.p`
-  color: ${colors.charcoal};
-  font-size: 14px;
-`;
-
-
 export const ErrorText = styled.p`
   color: ${colors.red};
   font-size: 16px;
   margin-top: 10px;
-`;
-
-export const Select = styled.select`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  border: 1px solid ${colors.slateGray};
-  font-size: 16px;
-  color: ${colors.charcoal};
-
-  &:focus {
-    border-color: ${colors.blueDark};
-    outline: none;
-  }
 `;
 
 export const SongContainer = styled.div`
@@ -703,7 +641,7 @@ export const SongContainer = styled.div`
   max-width: 600px;
   margin: 20px auto;
   text-align: center;
-  
+
   h2 {
     color: ${colors.charcoal};
     margin-bottom: 20px;
@@ -745,7 +683,7 @@ export const SongsContainer = styled.div`
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
-  
+
   h1 {
     color: ${colors.charcoal};
     margin-bottom: 20px;
@@ -768,7 +706,7 @@ export const SongItem = styled.li`
   margin-bottom: 10px;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  
+
   &:hover {
     background-color: ${colors.beigeLight};
   }
@@ -819,4 +757,112 @@ export const BackButton = styled.a`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const TrackItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${colors.beigeLight};
+  padding: 8px; /* Tamanho menor */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: ${colors.slateGray};
+  }
+`;
+
+export const Button = styled.button`
+  background-color: ${colors.charcoal};
+  color: ${colors.white};
+  border: none;
+  padding: 6px 12px; 
+  border-radius: 4px;
+  font-size: 14px;
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${colors.slateGray};
+  }
+
+  &:disabled {
+    background-color: ${colors.slateGray};
+    cursor: not-allowed;
+  }
+`;
+
+export const TrackList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+`;
+
+export const TrackTitle = styled.p`
+  color: ${colors.charcoal};
+  font-weight: bold;
+`;
+
+export const TrackArtist = styled.p`
+  color: ${colors.charcoal};
+  font-size: 14px;
+`;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+`;
+
+export const Container = styled.div`
+  padding: 20px;
+  background-color: ${colors.lightGray}; 
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 8px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+export const Title = styled.h1`
+  color: ${colors.whi};
+  font-size: 24px;
+  margin-bottom: 10px; 
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  color: ${colors.charcoal};
+  margin-bottom: 8px;
+`;
+
+export const Select = styled.select`
+  padding: 6px 10px; 
+  font-size: 14px; 
+  border-radius: 4px;
+  border: 1px solid ${colors.charcoal};
+  margin-top: 5px; 
+  margin-bottom: 10px; 
+`;
+
+export const SecondaryButton = styled(Button)`
+  margin-left: 10px; 
+  margin-top: 10px; 
+  align-self: flex-start; 
+  width: 100px;
+  height: 40px;
+`;
+export const PlaylistTitle = styled.h2`
+  font-size: 22px;
+  font-weight: bold;
+  color: ${colors.white}; 
+  background-color: ${colors.charcoal};
+  padding: 10px 15px; 
+  margin-bottom: 15px; 
+  margin-top:0px;
 `;

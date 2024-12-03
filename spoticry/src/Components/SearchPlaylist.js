@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { LoadingGif, PlaylistItem, SearchContainer, SearchInput, SearchButton, ErrorMessage } from "../style";
+import {
+  LoadingGif,
+  PlaylistItem,
+  SearchContainer,
+  SearchInput,
+  SearchButton,
+  ErrorMessage,
+} from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 import getUserIdFromToken from "../services/getUserIdFromToken";
@@ -12,6 +19,7 @@ const SearchMyPlaylists = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { goToPlaylist } = useCoordinator();
+  const [hasSearched, setHasSearched] = useState(false);
 
   const token = localStorage.getItem("spoticry_token");
 
@@ -23,6 +31,7 @@ const SearchMyPlaylists = () => {
 
     setLoading(true);
     setError(null);
+    setHasSearched(true);
 
     try {
       const response = await axios.get(
@@ -82,7 +91,7 @@ const SearchMyPlaylists = () => {
           ))}
         </ul>
       ) : (
-        !loading && <p>Nenhuma playlist encontrada.</p>
+        hasSearched && !loading && <p>Nenhuma playlist encontrada.</p>
       )}
     </SearchContainer>
   );

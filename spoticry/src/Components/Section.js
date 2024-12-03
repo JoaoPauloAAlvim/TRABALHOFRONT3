@@ -11,7 +11,7 @@ export const Section = (props) => {
         <h2>{props.title}</h2>
         <p>{props.subtitle}</p>
       </TextContainer>
-      <ImageSection src={props.image} alt={props.descricao} />
+      <ImageSection src={props.img} alt={props.descricao} />
     </SectionStyled>
   );
 };

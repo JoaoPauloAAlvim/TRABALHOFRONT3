@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import { usePlaylistContext } from "../contexts/PlaylistContext";
-import { LoadingGif, GlobalStyle,Container,Title,PlaylistListContainer,NoPlaylistsMessage,CreatePlaylistButton,PlaylistItemStyled } from "../style";
+import {
+  LoadingGif,
+  Container,
+  Title,
+  PlaylistListContainer,
+  NoPlaylistsMessage,
+  CreatePlaylistButton,
+  PlaylistItemStyled,
+  ErrorMessage,
+} from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import { usePlaylistsById } from "../hooks/usePlaylistsById";
 import { useDeletePlaylist } from "../hooks/useDeletePlaylist";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import EditPlaylistModal from "./EditPlaylistModal";
 import { useCoordinator } from "../hooks/useCoordinator";
-
-
 
 const PlaylistsList = () => {
   const { playlists, updatePlaylists } = usePlaylistContext();
@@ -26,6 +33,10 @@ const PlaylistsList = () => {
   const toggleCreateModal = () => setIsCreateModalOpen((prev) => !prev);
 
   const toggleEditModal = () => setIsEditModalOpen((prev) => !prev);
+
+  const handleAddPlaylist = (newPlaylist) => {
+    updatePlaylists([...playlists, newPlaylist]);
+  };
 
   const handleDelete = async (playlistId) => {
     if (window.confirm("Tem certeza que deseja excluir esta playlist?")) {
@@ -56,12 +67,11 @@ const PlaylistsList = () => {
 
   if (error) {
     console.error("Erro ao carregar playlists:", error);
-    return <div>{error}</div>;
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   return (
     <>
-      <GlobalStyle />
       <Container>
         <Title>Minhas Playlists</Title>
         {Array.isArray(playlists) && playlists.length > 0 ? (
@@ -88,14 +98,19 @@ const PlaylistsList = () => {
             ))}
           </PlaylistListContainer>
         ) : (
-          <NoPlaylistsMessage>Você ainda não criou nenhuma playlist.</NoPlaylistsMessage>
+          <NoPlaylistsMessage>
+            Você ainda não criou nenhuma playlist.
+          </NoPlaylistsMessage>
         )}
 
-        <CreatePlaylistButton onClick={toggleCreateModal}>Criar Nova Playlist</CreatePlaylistButton>
+        <CreatePlaylistButton onClick={toggleCreateModal}>
+          Criar Nova Playlist
+        </CreatePlaylistButton>
 
         <CreatePlaylistModal
           isOpen={isCreateModalOpen}
           onClose={toggleCreateModal}
+          onAddPlaylist={handleAddPlaylist} 
         />
 
         <EditPlaylistModal
@@ -107,5 +122,4 @@ const PlaylistsList = () => {
     </>
   );
 };
-
-export default PlaylistsList;
+export default PlaylistsList

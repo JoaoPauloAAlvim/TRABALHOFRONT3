@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Container, Label, LoadingGif, Select, Title } from "../style";
+import { Button, Container, Label, LoadingGif, Select, Title,SecondaryButton } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import URL_BASE from "../Constants/URL_BASE";
 
-const AddSongToPlaylist = ({ playlistId }) => {
+
+const AddSongToPlaylist = ({ playlistId, onSongAdded }) => {
   const [selectedSong, setSelectedSong] = useState("");
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ const AddSongToPlaylist = ({ playlistId }) => {
           Authorization: token,
         },
       });
-      setSongs(response.data.songs); 
+      setSongs(response.data.songs);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -45,12 +46,6 @@ const AddSongToPlaylist = ({ playlistId }) => {
 
     setLoading(true);
     try {
-      if (!token) {
-        alert("Você precisa estar autenticado.");
-        setLoading(false);
-        return;
-      }
-
       const response = await axios.post(
         `${URL_BASE}/playlist/${playlistId}/song`,
         { songId: selectedSong },
@@ -61,8 +56,10 @@ const AddSongToPlaylist = ({ playlistId }) => {
         }
       );
 
-      alert(response.data.message || "Música adicionada com sucesso!");
+      const newSong = response.data.song; 
+      onSongAdded(newSong); 
       setLoading(false);
+      alert(response.data.message || "Música adicionada com sucesso!");
     } catch (err) {
       setLoading(false);
       setError("Erro ao adicionar música.");
@@ -76,28 +73,30 @@ const AddSongToPlaylist = ({ playlistId }) => {
       {loading && <LoadingGif src={loadingGif} alt="Carregando..." />}
       {error && <p>{error}</p>}
 
-      <div>
-        <Label>Selecione a Música:</Label>
-        <Select
-          value={selectedSong}
-          onChange={(e) => setSelectedSong(e.target.value)}
-        >
-          <option value="">Selecione uma Música</option>
-          {Array.isArray(songs) && songs.length > 0 ? (
-            songs.map((song) => (
-              <option key={song.id} value={song.id}>
-                {song.title}
-              </option>
-            ))
-          ) : (
-            <option disabled>Sem músicas disponíveis</option>
-          )}
-        </Select>
-      </div>
+      <Label>Selecione a Música:</Label>
+      <Select
+        value={selectedSong}
+        onChange={(e) => setSelectedSong(e.target.value)}
+      >
+        <option value="">Selecione uma Música</option>
+        {Array.isArray(songs) && songs.length > 0 ? (
+          songs.map((song) => (
+            <option key={song.id} value={song.id}>
+              {song.title}
+            </option>
+          ))
+        ) : (
+          <option disabled>Sem músicas disponíveis</option>
+        )}
+      </Select>
 
-      <Button onClick={handleAddSongToPlaylist} disabled={loading}>
-        {loading ? <LoadingGif src={loadingGif} alt="Adicionando Música..." /> : "Adicionar Música"}
-      </Button>
+      <SecondaryButton onClick={handleAddSongToPlaylist} disabled={loading}>
+        {loading ? (
+          <LoadingGif src={loadingGif} alt="Adicionando Música..." />
+        ) : (
+          "Adicionar Música"
+        )}
+      </SecondaryButton>
     </Container>
   );
 };

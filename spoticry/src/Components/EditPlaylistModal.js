@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import { useEditPlaylist } from "../hooks/useEditPlaylist";
 import {
   Button,
@@ -11,6 +10,7 @@ import {
   ModalContent,
   ModalTitle,
   Textarea,
+  Backdrop,
 } from "../style";
 import loadingGif from "../Assets/Icons/loadingGif-gif.gif";
 import { ErrorMessage } from "../style";
@@ -53,48 +53,48 @@ const EditPlaylistModal = ({ isOpen, onClose, playlist }) => {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel="Editar Playlist"
-    >
-      <ModalContainer>
-        <ModalTitle>Editar Playlist</ModalTitle>
-        <ModalContent>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Nome da Playlist:</label>
-              <Input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label>Descrição (opcional):</label>
-              <Textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <ModalActions>
-              <Button type="submit" disabled={editing}>
-                {editing ? (
-                  <LoadingGif src={loadingGif} alt="Carregando..." />
-                ) : (
-                  "Salvar Alterações"
-                )}
-              </Button>
-              <CancelButton type="button" onClick={onClose}>
-                Cancelar
-              </CancelButton>
-            </ModalActions>
-          </form>
-        </ModalContent>
-        {editError && <ErrorMessage>{editError}</ErrorMessage>}
-      </ModalContainer>
-    </Modal>
+    <>
+      {isOpen && (
+        <Backdrop onClick={onClose}>
+          <ModalContainer onClick={(e) => e.stopPropagation()}>
+            <ModalTitle>Editar Playlist</ModalTitle>
+            <ModalContent>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label>Nome da Playlist:</label>
+                  <Input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Descrição (opcional):</label>
+                  <Textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
+                <ModalActions>
+                  <Button type="submit" disabled={editing}>
+                    {editing ? (
+                      <LoadingGif src={loadingGif} alt="Carregando..." />
+                    ) : (
+                      "Salvar Alterações"
+                    )}
+                  </Button>
+                  <CancelButton type="button" onClick={onClose}>
+                    Cancelar
+                  </CancelButton>
+                </ModalActions>
+              </form>
+            </ModalContent>
+            {editError && <ErrorMessage>{editError}</ErrorMessage>}
+          </ModalContainer>
+        </Backdrop>
+      )}
+    </>
   );
 };
 
